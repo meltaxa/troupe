@@ -1,0 +1,9 @@
+API_TOKEN = "YOUR-SLACK-API-TOKEN"
+DEFAULT_REPLY = "Sorry but I didn't understand you"
+CHANNEL_NAME = 'troupe'
+LOG_CHANNEL = 'botlogs'
+ERRORS_TO = "botlogs"
+PLUGINS = [
+    'troupe',
+    'homeops'
+]

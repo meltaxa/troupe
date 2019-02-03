@@ -1,0 +1,81 @@
+---
+plugins:
+  arlo:
+    enabled: No
+
+  chromecastaudio:
+    enabled: No
+    name: ChromecastAudio
+    media:
+      guarddog: 'http://192.168.0.16/sounds/guarddog.mp3'
+      bark: 'http://192.168.0.16/sounds/bark.mp3'
+
+  linktap:
+    enabled: No
+
+  lights:
+    enabled: No
+    devices:
+      bedroom:
+        vendor: lifx
+        macaddr: aa:bb:cc:dd:ee:ff
+        ipaddr: 192.168.0.10
+      lamp:
+        vendor: tplink
+        type: plug
+        ipaddr: 192.168.0.21
+      deck:
+        vendor: tplink
+        type: bulb
+        ipaddr: 192.168.0.22
+      dining:
+        vendor: tplink
+        type: bulb
+        ipaddr: 192.168.0.14
+      laundry:
+        vendor: tplink
+        type: bulb
+        ipaddr: 192.168.0.8
+
+  solariot:
+    enabled: No
+    battery:
+      title: ":battery: Today's battery level and usage"
+      url: https://grafana-panel-direct-link
+    grid:
+      title: ":electric_plug: Today's grid usage"
+      url: https://grafana-panel-direct-link
+    power:
+      title: ":sunny: Today's PV and load power"
+      url: https://grafana-panel-direct-link
+
+  wirelesstags:
+    enabled: No
+    
+servers:
+  homeops:
+    bot_webhook: 'https://hooks.slack.com/services/MY/HOMEOPS/WEBHOOK'
+
+  arlo:
+    username: 'arlo_user1@email.com'
+    password: 'arlo_password1'
+    bot_webhook: 'https://your-slack-webhook.com'
+    bot_username: 'arlo_user2@email.com'
+    bot_password: 'arlo_password2'
+
+  linktap:
+    host: 'https://www.link-tap.com/api/'
+    apikey: 'yourapikey'
+    username: 'yourlinktapusername'
+    gatewayid: 'yourlinktapgatewayid'
+    taplinkerid: 'yourtaplinkerid'
+
+  # Define the gitlab download artifact_url using the format described below:
+  # https://docs.gitlab.com/ee/user/project/pipelines/job_artifacts.html#downloading-the-latest-artifacts
+  gitlab:
+    token: "cw6zuvtyxi9qeAmVSpPr"
+    artifact_url: "https://gitlab.com/api/v4/projects/8388820/jobs/artifacts/master/download?job=build-package"
+
+  wirelesstags:
+    username: 'wirelesstags_user@email.com'
+    password: 'wirelesstags_password''
