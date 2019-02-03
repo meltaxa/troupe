@@ -1,0 +1,7 @@
+src/
+.cache/
+**/__pycache__
+.nextlaunch
+.tmplaunch
+homeops/settings.yml
+local_settings.py
