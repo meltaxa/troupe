@@ -7,8 +7,8 @@ plugins:
     enabled: No
     name: ChromecastAudio
     media:
-      guarddog: 'http://192.168.0.16/sounds/guarddog.mp3'
-      bark: 'http://192.168.0.16/sounds/bark.mp3'
+      guarddog: 'http://URL/guarddog.mp3'
+      bark: 'http://URL/bark.mp3'
 
   linktap:
     enabled: No
@@ -16,26 +16,27 @@ plugins:
   lights:
     enabled: No
     devices:
+      # Change name, macaddr and ipaddr where applicable.
       bedroom:
         vendor: lifx
         macaddr: aa:bb:cc:dd:ee:ff
-        ipaddr: 192.168.0.10
+        ipaddr: 192.168.0.100
       lamp:
         vendor: tplink
         type: plug
-        ipaddr: 192.168.0.21
+        ipaddr: 192.168.0.101
       deck:
         vendor: tplink
         type: bulb
-        ipaddr: 192.168.0.22
+        ipaddr: 192.168.0.102
       dining:
         vendor: tplink
         type: bulb
-        ipaddr: 192.168.0.14
+        ipaddr: 192.168.0.103
       laundry:
         vendor: tplink
         type: bulb
-        ipaddr: 192.168.0.8
+        ipaddr: 192.168.0.104
 
   solariot:
     enabled: No
@@ -73,8 +74,8 @@ servers:
   # Define the gitlab download artifact_url using the format described below:
   # https://docs.gitlab.com/ee/user/project/pipelines/job_artifacts.html#downloading-the-latest-artifacts
   gitlab:
-    token: "cw6zuvtyxi9qeAmVSpPr"
-    artifact_url: "https://gitlab.com/api/v4/projects/8388820/jobs/artifacts/master/download?job=build-package"
+    token: "CHANGEME"
+    artifact_url: "https://gitlab.com/api/v4/projects/ID/jobs/artifacts/master/download?job=build-package"
 
   wirelesstags:
     username: 'wirelesstags_user@email.com'
