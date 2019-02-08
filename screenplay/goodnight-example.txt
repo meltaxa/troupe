@@ -1,0 +1,5 @@
+# An example screenplay of commands to post to the channel in sequence.
+start watchdog
+arm arlo
+switch dining light off
+switch bedroom light off
