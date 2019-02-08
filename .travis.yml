@@ -1,11 +1,16 @@
 language: python
+
 python:
-- '3.5'
+  - '3.5'
+
 install:
-- pip install flake8
-- pip install --upgrade -r requirements.txt
+  - pip install flake8
+  - pip install --upgrade -r requirements.txt
+
 script:
-- flake8 .
+  - flake8 .
+
 notifications:
+  # Change the secure key to your own encrypted token.
   slack:
     secure: qPAh+U0+GOxSSSCTw/2umunXntjDUCWW3pgrEn+03sDpgoxqzzz/suVSelEVZo7JVnvZBLB2lZgBCoDHYvpc5g3XnV6CmB6SNVEcaSGifZVDenx0LySSAZZaKRQKby2WTTZOy2bIEDZhYer9UkjG8WRe6pgf7ZFV4UoKeRqNp8//LTS3fG5kF4Brbx3ypmIEFBmlF1EhN5moUnEjIlCkOiWVaViGYyf58sdWjXeTTrVBkgv3etkOYhultz1WEe9ORyccUjBheR7RcNz/52c/o9BaIaFMOMFD6bsDmpIDkaMBn0zWXqv8bEjQ1xNPuSOqvXTy4vKKperBAsUkz+JJiptt4aYaLzqqFa873nPyuZdxu6a7IrtQbcWhkLcskdOhvlne1hFVyeOH1y4QLdhvDEGeAECuGO5uMuEnCzNSHEc0SJm8maALnWBVrLt4u7UblLdwWjrJ1KS3ENKLWMzej61viJwly3UJFj1ETxz2NEXPHVhv/MGfg3yjY8JQZmXF89I1M7V7Kkq7oB384fNFTn10/309nnEkOX7VQd8ouWsgQ1naBQxKZ9TGFsh8X/q/oJppYDzZCRQG7ze5J0Nubh2SoYx/lFgMY+EC2SGMyCbCyd3OLXnw20K11N2zgfSvsGnNwOd1xXTAJ421Zrdu/C2NTBvdARAPZvbhDTd+07c=

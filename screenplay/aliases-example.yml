@@ -1,0 +1,4 @@
+# Command aliases to run other screenplays.
+# For example, posting a "goodnight" message will run the command "screenplay 
+# goodnight-example"
+"^goodnight$": "screenplay goodnight-example"
