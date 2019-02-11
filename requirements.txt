@@ -9,4 +9,4 @@ attrdict>=2.0.0
 pyyaml>=-3.13
 pyflakes>=2.0.0
 lifxlan>=1.2.5
-slackmq>=0.1.0
+slackmq>=0.1.2
