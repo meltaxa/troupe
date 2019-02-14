@@ -21,6 +21,7 @@ nextlaunch = os.environ['NEXTLAUNCH']
 device_name = os.environ['DEVICE_NAME']
 os.environ['CHANNEL_NAME'] = local_settings.CHANNEL_NAME
 os.environ['API_TOKEN'] = local_settings.API_TOKEN
+os.environ['OATH_ACCESS_TOKEN'] = local_settings.OATH_ACCESS_TOKEN
 if eval(os.environ['DEBUG']):
     debug = "[{}] ".format(device_name)
 else:
