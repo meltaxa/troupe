@@ -1,4 +1,5 @@
 -e git+https://github.com/meltaxa/slackbot.git@64bbafa896e2eb5b189f99ea55ffbd17226f3630#egg=slackbot
+-e git+https://github.com/meltaxa/slackmq.git@73c458f8bb56355bc62cffb86512f0a4181d918b#egg=slackmq
 pycrypto>=2.6.1
 pyHS100>=0.3.2
 arlo>=1.1.7
@@ -9,4 +10,3 @@ attrdict>=2.0.0
 pyyaml>=-3.13
 pyflakes>=2.0.0
 lifxlan>=1.2.5
-slackmq>=0.1.2
