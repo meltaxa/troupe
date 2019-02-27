@@ -10,3 +10,4 @@ pyyaml>=-3.13
 pyflakes>=2.0.0
 lifxlan>=1.2.5
 slackmq>=0.1.2
+websocket-client<=0.54.0
