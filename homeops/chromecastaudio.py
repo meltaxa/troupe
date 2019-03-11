@@ -74,6 +74,7 @@ if (settings.plugins.chromecastaudio.enabled):
                      .format(debug, level))
         cast = next(cc for cc in chromecasts
                     if cc.device.friendly_name == speaker_name)
+        cast.wait()
         cast.set_volume(float(level)/100)
         post.unack()
 
