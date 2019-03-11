@@ -1,7 +1,7 @@
 import re
 from slackbot.bot import listen_to
 from . import settings
-from Arlo import Arlo
+from arlo import Arlo
 import os
 import sys
 from slackmq import slackmq

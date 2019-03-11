@@ -2,7 +2,6 @@ import re
 from slackbot.bot import listen_to
 from . import settings
 import pychromecast
-import socket
 import os
 import sys
 from slackmq import slackmq
@@ -13,25 +12,12 @@ device_name = os.environ['DEVICE_NAME']
 chat = chatops.Chatops(settings.servers.homeops.bot_webhook)
 
 
-def isOpen(ip, port):
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.settimeout(1)
-        s.connect((ip, int(port)))
-        return True
-    except Exception:
-        return False
-    finally:
-        s.shutdown(socket.SHUT_RDWR)
-        s.close()
+if (settings.plugins.chromecastaudio.enabled):
+    chromecasts = pychromecast.get_chromecasts()
 
-
-if (settings.plugins.chromecastaudio.enabled) and \
-   isOpen(settings.plugins.chromecastaudio.ipaddress, 8008):
-    cast = pychromecast.Chromecast(settings.plugins.chromecastaudio.ipaddress)
-
-    @listen_to('^play (.*)', re.IGNORECASE)
-    def play(message, sound_effect):
+    @listen_to('^play (.*) on (.*)', re.IGNORECASE)
+    @listen_to(r'^play (\w+)$', re.IGNORECASE)
+    def play(message, sound_effect, speaker_name='default'):
         """play <audio url or alias>
            Stream an audio file from a given URL (or alias).
         """
@@ -43,6 +29,10 @@ if (settings.plugins.chromecastaudio.enabled) and \
                        message.body['ts'])
         if not post.ack():
             return
+        if speaker_name == 'default':
+            speaker_name = settings.plugins.chromecastaudio.default
+        cast = next(cc for cc in chromecasts
+                    if cc.device.friendly_name == speaker_name)
         if eval(os.environ['DEBUG']):
             debug = "[{}] ".format(device_name)
         else:
@@ -60,8 +50,9 @@ if (settings.plugins.chromecastaudio.enabled) and \
         mc.block_until_active()
         post.unack()
 
-    @listen_to('^volume (.*)', re.IGNORECASE)
-    def volume(message, this):
+    @listen_to('^volume (.*) on (.*)', re.IGNORECASE)
+    @listen_to(r'^volume (\w+)$', re.IGNORECASE)
+    def volume(message, level, speaker_name='default'):
         """volume <percent level>
            Set the volume level (percent).
         """
@@ -73,13 +64,17 @@ if (settings.plugins.chromecastaudio.enabled) and \
                        message.body['ts'])
         if not post.ack():
             return
+        if speaker_name == 'default':
+            speaker_name = settings.plugins.chromecastaudio.default
         if eval(os.environ['DEBUG']):
             debug = "[{}] ".format(device_name)
         else:
             debug = ""
         message.send(":loud_sound: {}Setting the speaker volume to {}%."
-                     .format(debug, this))
-        cast.set_volume(float(this)/100)
+                     .format(debug, level))
+        cast = next(cc for cc in chromecasts
+                    if cc.device.friendly_name == speaker_name)
+        cast.set_volume(float(level)/100)
         post.unack()
 
     @listen_to('^help (play|volume)', re.IGNORECASE)
