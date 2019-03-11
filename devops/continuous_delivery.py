@@ -275,7 +275,7 @@ def relaunch(message, target_device=all):
             args = ['"%s"' % arg for arg in args]
         sleep(10)
         os.chdir(base_dir)
-        check_dependencies(message, base_dir + '/requirements.txt')
+        #DISABLED#check_dependencies(message, base_dir + '/requirements.txt')
         os.execv(sys.executable, args)
 
 
