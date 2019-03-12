@@ -112,7 +112,7 @@ def catchall(message, text):
         return
     try:
         scripts = open(base_dir + "/screenplays/aliases.yml", "r")
-        acts = yaml.load_all(scripts)
+        acts = yaml.load_all(scripts, Loader=yaml.FullLoader)
         for act in acts:
             for alias, response in act.items():
                 regexp = re.compile(alias)
