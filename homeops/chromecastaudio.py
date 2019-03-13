@@ -33,6 +33,7 @@ if (settings.plugins.chromecastaudio.enabled):
             speaker_name = settings.plugins.chromecastaudio.default
         cast = next(cc for cc in chromecasts
                     if cc.device.friendly_name == speaker_name)
+        cast.wait()
         if eval(os.environ['DEBUG']):
             debug = "[{}] ".format(device_name)
         else:
@@ -45,9 +46,12 @@ if (settings.plugins.chromecastaudio.enabled):
         message.send(":loud_sound: {}Playing {} on the speaker."
                      .format(debug, sound_effect))
         mc = cast.media_controller
-        cast.wait()
         mc.play_media(sound, 'audio/mp3')
         mc.block_until_active()
+        mc.play()
+        while not mc.status.player_is_idle:
+            time.sleep(0.5)
+        mc.stop()
         post.unack()
 
     @listen_to('^volume (.*) on (.*)', re.IGNORECASE)
@@ -76,6 +80,7 @@ if (settings.plugins.chromecastaudio.enabled):
                     if cc.device.friendly_name == speaker_name)
         cast.wait()
         cast.set_volume(float(level)/100)
+        cast.quit_app()
         post.unack()
 
     @listen_to('^help (play|volume)', re.IGNORECASE)
