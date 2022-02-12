@@ -60,6 +60,7 @@ servers:
   arlo:
     username: 'arlo_user1@email.com'
     password: 'arlo_password1'
+    mfa: '/path/to/gmail.credentials'
     bot_webhook: 'https://your-slack-webhook.com'
     bot_username: 'arlo_user2@email.com'
     bot_password: 'arlo_password2'
