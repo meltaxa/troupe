@@ -5,3 +5,12 @@ src/
 .tmplaunch
 homeops/settings.yml
 local_settings.py
+devops/settings.yml
+homeops/gmail.credentials
+screenplays/aliases.yml
+screenplays/custom-arlo.txt
+screenplays/goodnight.yml
+screenplays/watchdog-arm.txt
+screenplays/watchdog-back.txt
+screenplays/watchdog-front.txt
+screenplays/watchdog-shed.txt

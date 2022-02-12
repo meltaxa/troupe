@@ -32,7 +32,8 @@ if (settings.plugins.arlo.enabled):
             debug = ""
         message.send(":rotating_light: {}Arming Arlo.".format(debug))
         arlo = Arlo(settings.servers.arlo.username,
-                    settings.servers.arlo.password)
+                    settings.servers.arlo.password,
+                    settings.servers.arlo.mfa)
         basestations = arlo.GetDevices('basestation')
         arlo.Arm(basestations[0])
         # Perform any post arming actions via a screenplay
@@ -60,7 +61,8 @@ if (settings.plugins.arlo.enabled):
             debug = ""
         message.send(":rotating_light: {}Disarming Arlo.".format(debug))
         arlo = Arlo(settings.servers.arlo.username,
-                    settings.servers.arlo.password)
+                    settings.servers.arlo.password,
+                    settings.servers.arlo.mfa)
         basestations = arlo.GetDevices('basestation')
         arlo.Disarm(basestations[0])
         message.send(":rotating_light: {}Arlo is disarmed.".format(debug))

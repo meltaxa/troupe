@@ -14,7 +14,6 @@ chat = chatops.Chatops(settings.servers.homeops.bot_webhook)
 
 
 if (settings.plugins.chromecastaudio.enabled):
-    chromecasts = pychromecast.get_chromecasts()
 
     @listen_to('^play (.*) on (.*)', re.IGNORECASE)
     @listen_to(r'^play (\w+)$', re.IGNORECASE)
@@ -32,8 +31,8 @@ if (settings.plugins.chromecastaudio.enabled):
             return
         if speaker_name == 'default':
             speaker_name = settings.plugins.chromecastaudio.default
-        cast = next(cc for cc in chromecasts
-                    if cc.device.friendly_name == speaker_name)
+        chromecasts, browser = pychromecast.get_listed_chromecasts(friendly_names=[speaker_name])
+        cast = chromecasts[0]
         cast.wait()
         if eval(os.environ['DEBUG']):
             debug = "[{}] ".format(device_name)
@@ -48,11 +47,11 @@ if (settings.plugins.chromecastaudio.enabled):
                      .format(debug, sound_effect))
         mc = cast.media_controller
         mc.play_media(sound, 'audio/mp3')
-        mc.block_until_active()
-        mc.play()
-        while not mc.status.player_is_idle:
-            time.sleep(0.5)
-        mc.stop()
+
+        # Wait for Chromecast to start playing
+        while mc.status.player_state != "PLAYING":
+            time.sleep(0.1)
+
         post.unack()
 
     @listen_to('^volume (.*) on (.*)', re.IGNORECASE)
@@ -77,8 +76,10 @@ if (settings.plugins.chromecastaudio.enabled):
             debug = ""
         message.send(":loud_sound: {}Setting the speaker volume to {}%."
                      .format(debug, level))
-        cast = next(cc for cc in chromecasts
-                    if cc.device.friendly_name == speaker_name)
+        print(speaker_name)
+        chromecasts, browser = pychromecast.get_listed_chromecasts(friendly_names=[speaker_name])
+        cast = chromecasts[0]
+        print(cast)
         cast.wait()
         cast.set_volume(float(level)/100)
         cast.quit_app()

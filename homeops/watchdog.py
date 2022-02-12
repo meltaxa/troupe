@@ -13,9 +13,9 @@ device_name = os.environ['DEVICE_NAME']
 chat = chatops.Chatops(settings.servers.arlo.bot_webhook)
 
 
-def login(USERNAME, PASSWORD):
+def login(USERNAME, PASSWORD, MFA):
     global arlo
-    arlo = Arlo(USERNAME, PASSWORD)
+    arlo = Arlo(USERNAME, PASSWORD, MFA)
     global basestations
     basestations = arlo.GetDevices('basestation')
 
@@ -101,7 +101,8 @@ def start_watchdog(message):
     try:
         post.unack()
         login(settings.servers.arlo.bot_username,
-              settings.servers.arlo.bot_password)
+              settings.servers.arlo.bot_password,
+              settings.servers.arlo.mfa)
         arlo.SubscribeToMotionEvents(basestations[0], callback, timeout=120)
     except Exception:
         pass
