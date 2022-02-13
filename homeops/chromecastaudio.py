@@ -31,7 +31,8 @@ if (settings.plugins.chromecastaudio.enabled):
             return
         if speaker_name == 'default':
             speaker_name = settings.plugins.chromecastaudio.default
-        chromecasts, browser = pychromecast.get_listed_chromecasts(friendly_names=[speaker_name])
+        chromecasts, browser = pychromecast.get_listed_chromecasts(
+                                   friendly_names=[speaker_name])
         cast = chromecasts[0]
         cast.wait()
         if eval(os.environ['DEBUG']):
@@ -77,7 +78,8 @@ if (settings.plugins.chromecastaudio.enabled):
         message.send(":loud_sound: {}Setting the speaker volume to {}%."
                      .format(debug, level))
         print(speaker_name)
-        chromecasts, browser = pychromecast.get_listed_chromecasts(friendly_names=[speaker_name])
+        chromecasts, browser = pychromecast.get_listed_chromecasts(
+                                   friendly_names=[speaker_name])
         cast = chromecasts[0]
         print(cast)
         cast.wait()

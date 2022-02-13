@@ -30,10 +30,13 @@ if (settings.plugins.wirelesstags.enabled):
                                          password=password)
         sensors = api.load_tags()
         for (uuid, tag) in sensors.items():
-            message.send('Loaded sensor: {}, temp: {}, humidity: {} ' +
-                         'probe taken: {}'.format(
-                             tag.name, tag.temperature,
-                             tag.humidity, tag.time_since_last_update))
+            message.send(
+              'Loaded sensor: {0}, \
+               temp: {1}, \
+               humidity: {2} \
+               probe taken: {3}'.format(
+               tag.name, tag.temperature,
+               tag.humidity, tag.time_since_last_update))
         post.unack()
 
     @listen_to('^help (show) (.*)$', re.IGNORECASE)
